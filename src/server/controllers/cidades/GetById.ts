@@ -15,15 +15,17 @@ export const getByIdValidation = validation((getSchema) => ({
   ),
 }));
 
-export const getById = async (req: Request<IParamsProp>, res: Response) => {
-  if (Number(req.params.id) === 99999)
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+export const getById = async (req: Request<IParamsProp>, res: Response): Promise<void> => {
+  if (Number(req.params.id) === 99999) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
         default: 'Registro não encontrado',
       },
     });
+    return;
+  }
 
-  return res.status(StatusCodes.OK).json({
+  res.status(StatusCodes.OK).json({
     id: req.params.id,
     nome: 'São Paulo',
   });

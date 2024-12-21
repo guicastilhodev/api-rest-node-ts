@@ -15,7 +15,12 @@ describe('Method: GetAll', () => {
     const res = await testServer.get('/cidades').query({ page: page });
 
     expect(res.statusCode).toStrictEqual(StatusCodes.OK);
-    expect(res.body).toStrictEqual(`Cidades na página ${page}`);
+    expect(res.body).toStrictEqual([
+      {
+        id: 1,
+        nome: 'São Paulo',
+      },
+    ]);
   });
 
   it('Should return a error if the query params are less than 0', async () => {
