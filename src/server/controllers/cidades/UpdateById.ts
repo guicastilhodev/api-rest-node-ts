@@ -3,12 +3,13 @@ import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { validation } from '../../shared/middlewares/Validation';
 import { StatusCodes } from 'http-status-codes';
+import { ICidade } from '../../databases/models';
 
 interface IParamsProps {
   id?: number;
 }
 
-interface IBodyProps {
+interface IBodyProps extends Omit<ICidade, 'id'> {
   nome: string;
 }
 
